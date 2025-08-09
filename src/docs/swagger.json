@@ -1,0 +1,94 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "API de Testes e Automação",
+    "version": "1.0.0",
+    "description": "API Rest para login, registro, consulta de usuários e transferências."
+  },
+  "paths": {
+    "/api/auth/login": {
+      "post": {
+        "summary": "Login de usuário",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "login": { "type": "string" },
+                  "senha": { "type": "string" }
+                },
+                "required": ["login", "senha"]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": { "description": "Login realizado" },
+          "400": { "description": "Erro de validação" }
+        }
+      }
+    },
+    "/api/users": {
+      "post": {
+        "summary": "Registrar novo usuário",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "login": { "type": "string" },
+                  "senha": { "type": "string" },
+                  "nome": { "type": "string" },
+                  "favorecidos": {
+                    "type": "array",
+                    "items": { "type": "string" }
+                  }
+                },
+                "required": ["login", "senha", "nome"]
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": { "description": "Usuário criado" },
+          "400": { "description": "Usuário já existe" }
+        }
+      },
+      "get": {
+        "summary": "Listar usuários",
+        "responses": {
+          "200": { "description": "Lista de usuários" }
+        }
+      }
+    },
+    "/api/transfers": {
+      "post": {
+        "summary": "Transferir valores",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "remetente": { "type": "string" },
+                  "destinatario": { "type": "string" },
+                  "valor": { "type": "number" }
+                },
+                "required": ["remetente", "destinatario", "valor"]
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": { "description": "Transferência realizada" },
+          "400": { "description": "Erro de validação" }
+        }
+      }
+    }
+  }
+}
