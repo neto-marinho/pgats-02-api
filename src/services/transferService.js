@@ -5,7 +5,7 @@ function transfer({ remetente, destinatario, valor }) {
   const remetenteUser = findUserByLogin(remetente);
   const destinatarioUser = findUserByLogin(destinatario);
   if (!remetenteUser || !destinatarioUser) {
-    throw new Error('Usuário remetente ou destinatário não encontrado');
+    throw new Error('Usuário remetente ou destinatário não foi encontrado');
   }
   const isFavorecido = remetenteUser.favorecidos && remetenteUser.favorecidos.includes(destinatario);
   if (!isFavorecido && valor >= 5000) {
